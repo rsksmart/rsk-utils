@@ -1,0 +1,49 @@
+{
+  "name": "rsk-utils",
+  "version": "0.0.1",
+  "description": "A collection of JS utility functions for RSK",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "npx eslint src/**/* --quiet",
+    "test": "npx nyc mocha test/**/*.spec.js",
+    "doc": "node ./.doc/makeReadme.js > README.md",
+    "build": "npm run lint && npm run doc && npx babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rsk-utils.git"
+  },
+  "keywords": [
+    "rsk",
+    "utils"
+  ],
+  "author": "emi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rsksmart/rsk-utils/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rsk-utils#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.0",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-bytes": "^0.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "rskjs-jsdoc2md": "git+https://github.com/rsksmart/rskjs-jsdoc2md.git"
+  },
+  "dependencies": {
+    "keccak": "^2.0.0"
+  }
+}
