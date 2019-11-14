@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/tpm
+    docker:
+      - image: circleci/node:10.16.3
+
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            cd ~/tpm/
+            npm i
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: Run Tests
+          command: npm run test
