@@ -44,6 +44,7 @@
     "rskjs-jsdoc2md": "git+https://github.com/rsksmart/rskjs-jsdoc2md.git"
   },
   "dependencies": {
-    "keccak": "^2.0.0"
+    "keccak": "^2.0.0",
+    "rlp": "^2.2.4"
   }
 }
