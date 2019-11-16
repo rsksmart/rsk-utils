@@ -1,8 +1,8 @@
-import { sumDigits, isNullData } from '../src/validate'
+import { sumDigits, isNullData } from '../src/data'
 import { expect } from 'chai'
 
-const empty = [null, 0, '0x', '0x0', '0x00', undefined, false, '']
-const notEmpty = [1, 'a', '0xa', '0x1', '12', true, 'blah']
+const empty = [null, 0, '0x', '0x0', '0x00', undefined, false, '', '   ']
+const notEmpty = [1, 'a', '0xa', '0x1', '12', true, 'blah', '  1']
 const wrapStr = str => (typeof str === 'string') ? `"${str}"` : str
 
 describe(`# Validate`, function () {
@@ -33,5 +33,4 @@ describe(`# Validate`, function () {
       })
     }
   })
-
 })

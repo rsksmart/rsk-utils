@@ -4,6 +4,6 @@ export const sumDigits = value => `${value}`.split('').map(Number).reduce((a, b)
 
 export function isNullData (value) {
   const test = (value && remove0x(value))
-  if (sumDigits(test) === 0) return true
-  return (test === '') ? true : !test
+  if (test === '' || sumDigits(test) === 0) return true
+  return !test
 }

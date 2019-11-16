@@ -5,5 +5,5 @@ export * from './bytes'
 export * from './encoding'
 export * from './hashes'
 export * from './strings'
-export * from './validate'
+export * from './data'
 export { rlp }
