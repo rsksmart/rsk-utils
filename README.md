@@ -97,7 +97,7 @@ Creates Keccak sha256 hash
 <a name="isHexString"></a>
 
 ### isHexString(str) ⇒ <code>Boolean</code>
-Check if a string is hex string
+Checks if a string is hex string
 
 **Kind**: global function  
 **Params**
@@ -108,6 +108,16 @@ Check if a string is hex string
 
 ### add0x(str) ⇒ <code>String</code>
 Add '0x' at start of hex strings, honoring prefix
+
+**Kind**: global function  
+**Params**
+
+- str <code>String</code>
+
+<a name="hasHexPrefix"></a>
+
+### hasHexPrefix(str) ⇒ <code>Boolean</code>
+Checks if string is hex prefixed
 
 **Kind**: global function  
 **Params**

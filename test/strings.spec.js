@@ -6,7 +6,9 @@ const add0xExpect = [
   ['abc456', '0xabc456'],
   ['john', 'john'],
   ['0x23897bcfe8', '0x23897bcfe8'],
-  ['-1b5267b1b18ce000000', '-0x1b5267b1b18ce000000']
+  ['-1b5267b1b18ce000000', '-0x1b5267b1b18ce000000'],
+  [undefined, TypeError, assertThrow],
+  [{}, TypeError, assertThrow]
 ]
 
 const remove0xExpect = [

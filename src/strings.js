@@ -1,5 +1,15 @@
+const HEX_PREFIX = '0x'
+
+function isHexPrefix (str) {
+  return str === HEX_PREFIX
+}
+
+function checkString (value) {
+  if (typeof value !== 'string') throw new TypeError('str is not a string')
+}
+
 /**
- * @description Check if a string is hex string
+ * @description Checks if a string is hex string
  * @param {String} str
  * @returns {Boolean}
  */
@@ -14,14 +24,24 @@ export function isHexString (str) {
  * @returns {String}
  */
 export function add0x (str) {
-  if (typeof str !== 'string') throw new TypeError('str is not a string')
+  checkString(str)
   let s = str
   let prefix = (s[0] === '-') ? '-' : ''
   if (prefix) s = s.substring(prefix.length)
-  if (isHexString(s) && s.substring(0, 2) !== '0x') {
-    return `${prefix}0x${s}`
+  if (isHexString(s) && s.substring(0, 2) !== HEX_PREFIX) {
+    return `${prefix}${HEX_PREFIX}${s}`
   }
   return str
+}
+
+/**
+ * @description Checks if string is hex prefixed
+ * @param {String} str
+ * @returns {Boolean}
+ */
+export function hasHexPrefix (str) {
+  checkString(str)
+  return str.substring(0, HEX_PREFIX.length) === HEX_PREFIX
 }
 
 /**
@@ -31,7 +51,7 @@ export function add0x (str) {
  */
 export function stripHexPrefix (str) {
   if (typeof str !== 'string') throw new TypeError('str is not a string')
-  return (str.substring(0, 2) === '0x') ? str.substring(2) : str
+  return (hasHexPrefix(str)) ? str.substring(HEX_PREFIX.length) : str
 }
 
 /**
@@ -41,12 +61,12 @@ export function stripHexPrefix (str) {
  */
 export function remove0x (value) {
   if (typeof value !== 'string') return value
-  if (value === '0x') return ''
+  if (isHexPrefix(value)) return ''
   let s = `${value}`
   let prefix = (s[0] === '-') ? '-' : ''
   if (prefix) s = s.substring(prefix.length)
   if (isHexString(s)) {
-    if (s.substring(0, 2) === '0x') return prefix + s.substr(2)
+    if (hasHexPrefix(s)) return prefix + stripHexPrefix(s)
   }
   return value
 }
