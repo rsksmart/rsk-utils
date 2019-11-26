@@ -1,4 +1,3 @@
-
 import keccak from 'keccak'
 
 /**
