@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "npx eslint src/**/* --quiet",
-    "test": "npx nyc mocha test/**/*.spec.js",
+    "test:node": "npx nyc mocha test/**/*.spec.js",
+    "test:browser": "npx karma start",
+    "test": "npm run test:node && npm run test:browser",
     "doc": "node ./.doc/makeReadme.js > README.md",
     "build": "npm run lint && npm run doc && npx babel src -d dist"
   },
@@ -23,12 +25,18 @@
     "url": "https://github.com/rsksmart/rsk-utils/issues"
   },
   "homepage": "https://github.com/rsksmart/rsk-utils#readme",
+  "dependencies": {
+    "keccak": "^2.0.0",
+    "rlp": "^2.2.4"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.0",
     "@babel/node": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/register": "^7.7.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bytes": "^0.1.2",
@@ -39,12 +47,13 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "karma": "^4.4.1",
+    "karma-browserify": "^6.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-firefox-launcher": "^1.2.0",
+    "karma-mocha": "^1.3.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "rskjs-jsdoc2md": "git+https://github.com/rsksmart/rskjs-jsdoc2md.git"
-  },
-  "dependencies": {
-    "keccak": "^2.0.0",
-    "rlp": "^2.2.4"
   }
 }
