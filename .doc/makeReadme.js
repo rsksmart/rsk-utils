@@ -4,7 +4,7 @@ const fs = require('fs')
 
 // const files = path.resolve(__dirname, '../src') + '/*.js'
 const basePath = path.resolve(__dirname, '../src')
-const files = fs.readdirSync(basePath).map(f => {
+const files = fs.readdirSync(basePath).filter(f => f.endsWith('.js')).map(f => {
   return { path: `${basePath}/${f}`, name: titleFromFile(f) }
 })
 const parser = Jsdoc2md({ 'heading-depth': 3 })

@@ -1,4 +1,11 @@
-import { isAddress, isValidChecksumAddress, toChecksumAddress } from '../src/addresses'
+import {
+  isAddress,
+  isValidChecksumAddress,
+  toChecksumAddress,
+  isValidAddress,
+  searchChecksummedNetworks
+} from '../src/addresses'
+
 import { assert } from 'chai'
 
 const invalidAddresses = [
@@ -116,13 +123,35 @@ const allAddresses = [
 describe(`# Addresses`, function () {
   test({ isAddress }, allAddresses, true)
   test({ isAddress }, invalidAddresses, false)
+  test({ isValidAddress }, invalidAddresses, false)
+  test({ isValidAddress }, plainAddresses, true)
+
   for (let id in netAddresses) {
-    test({ isValidChecksumAddress }, netAddresses[id].map(a => [a, id]), true)
+    let addrs = netAddresses[id].map(a => [a, id])
+    test({ isValidChecksumAddress }, addrs, true)
+    test({ isValidAddress }, addrs, true)
+    // validateAddress with changed ids
+    test({ isValidAddress }, netAddresses[id].map(a => [a, (parseInt(id) + 2)]), false)
   }
+
   for (let id in eip1191ChecksummAddresses) {
-    test({ isValidChecksumAddress }, eip1191ChecksummAddresses[id].map(a => [a, id]), true)
+    let addrs = eip1191ChecksummAddresses[id].map(a => [a, id])
+    test({ isValidChecksumAddress }, addrs, true)
+    test({ isValidAddress }, addrs, true)
   }
   test({ toChecksumAddress }, EIP1191ethMainnet.map(a => [a, undefined]), EIP1191ethMainnet)
+})
+
+describe(`searchChecksummedNetworks()`, function () {
+  for (let id in netAddresses) {
+    for (let address of netAddresses[id]) {
+      it(`should return a network info`, () => {
+        let result = searchChecksummedNetworks(address)
+        assert.equal(Array.isArray(result), true)
+        assert.isTrue(result.map(r => r.chainId).includes(parseInt(id)))
+      })
+    }
+  }
 })
 
 function test (payload, value, expected) {
