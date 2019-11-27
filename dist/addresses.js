@@ -1,11 +1,12 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.isAddress = isAddress;exports.toChecksumAddress = toChecksumAddress;exports.isValidChecksumAddress = isValidChecksumAddress;var _hashes = require("./hashes");
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.isAddress = isAddress;exports.toChecksumAddress = toChecksumAddress;exports.isValidChecksumAddress = isValidChecksumAddress;exports.isValidAddress = isValidAddress;exports.searchChecksummedNetworks = searchChecksummedNetworks;var _hashes = require("./hashes");
 var _strings = require("./strings");
+var _networks = _interopRequireDefault(require("./networks.json"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-
-
-
-
-
+/**
+                                                                                                                                                                  * @description Check if a string is an address
+                                                                                                                                                                  * @param {String} address
+                                                                                                                                                                  * @returns {Boolean}
+                                                                                                                                                                  */
 function isAddress(address) {
   return /^(0x)?[0-9a-fA-F]{40}$/.test(address);
 }
@@ -32,4 +33,30 @@ function toChecksumAddress(address, chainId) {
    */
 function isValidChecksumAddress(address, chainId) {
   return isAddress(address) && toChecksumAddress(address, chainId) === address;
+}
+
+/**
+   * @description Checks if an address is valid.
+   * @param {String} address
+   * @param {Integer|String} chainId
+   * @returns {Boolean}
+   */
+function isValidAddress(address, chainId) {
+  if (typeof address !== 'string') return false;
+  if (address.match(/[A-F]/)) {
+    return isValidChecksumAddress(address, chainId);
+  }
+  return isAddress(address);
+}
+
+/**
+   * @description Search network info of checksummed address
+   * @param {String} address
+   * @param {Array} [networks], chainId list
+   * see: https://chainid.network/chains.json
+   * @returns {Array}
+   */
+function searchChecksummedNetworks(address, networks) {
+  networks = networks || _networks.default;
+  return networks.filter(net => toChecksumAddress(address, net.chainId) === address);
 }

@@ -2,6 +2,16 @@
 > A collection of JS utility functions for RSK.
 
 ## Addresses
+<a name="isAddress"></a>
+
+### isAddress(address) ⇒ <code>Boolean</code>
+Check if a string is an address
+
+**Kind**: global function  
+**Params**
+
+- address <code>String</code>
+
 <a name="toChecksumAddress"></a>
 
 ### toChecksumAddress(address, chainId) ⇒ <code>String</code>
@@ -24,6 +34,29 @@ Validates address checksum
 
 - address <code>String</code>
 - chainId <code>Integer</code> | <code>String</code>
+
+<a name="isValidAddress"></a>
+
+### isValidAddress(address, chainId) ⇒ <code>Boolean</code>
+Checks if an address is valid.
+
+**Kind**: global function  
+**Params**
+
+- address <code>String</code>
+- chainId <code>Integer</code> | <code>String</code>
+
+<a name="searchChecksummedNetworks"></a>
+
+### searchChecksummedNetworks(address, [networks]) ⇒ <code>Array</code>
+Search network info of checksummed address
+
+**Kind**: global function  
+**Params**
+
+- address <code>String</code>
+- [networks] <code>Array</code> - chainId list
+see: https://chainid.network/chains.json
 
 
 ## Arrays
