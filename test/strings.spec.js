@@ -1,4 +1,4 @@
-import { add0x, remove0x, isHexString, stripHexPrefix } from '../src/strings'
+import { add0x, remove0x, isHexString, stripHexPrefix, isTxOrBlockHash } from '../src/strings'
 import { expect } from 'chai'
 
 const add0xExpect = [
@@ -50,11 +50,23 @@ const notHexStrings = [
   'test'
 ]
 
+const isTxOrBlockHashExpect = [
+  [undefined, false],
+  [null, false],
+  [0, false],
+  [0x55e62371790fcdb645cb015c5393964d45f83b8584c31a86794caef88a0d3b85, false],
+  ['0x0000000000000000000000000000000000000000000000000000000000000000', false],
+  ['0x55e62371790fcdb645cb015c5393964d45f83b8584c31a86794caef88a0d3b85', true],
+  ['0xe3a417a2d9404ea54ce55572318b42b78424ab050209508132abd2977aa3dfbe', true],
+  ['0xa2c441d3e3a96a17a52bd0c6b3c763d61164664cd5fdfca7f5b8596dd20d93cf', true]
+]
+
 describe(`# Strings`, function () {
   test({ isHexString }, [...hexStrings.map(s => [s, true]), ...notHexStrings.map(s => [s, false])])
   test({ add0x }, add0xExpect)
   test({ remove0x }, remove0xExpect)
   test({ stripHexPrefix }, stripHexPrefixExpect)
+  test({ isTxOrBlockHash }, isTxOrBlockHashExpect)
 })
 
 function test (payload, values) {

@@ -178,4 +178,15 @@ Remove '0x' from hex strings, honoring prefix
 
 - value <code>Any</code>
 
+<a name="isTxOrBlockHash"></a>
+
+### isTxOrBlockHash(str) ⇒ <code>Boolean</code>
+Checks if a string is a tx or block hash
+
+**Kind**: global function  
+**Returns**: <code>Boolean</code> - '  
+**Params**
+
+- str <code>string</code>
+
 

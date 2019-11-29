@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.isHexString = isHexString;exports.add0x = add0x;exports.hasHexPrefix = hasHexPrefix;exports.stripHexPrefix = stripHexPrefix;exports.remove0x = remove0x;const HEX_PREFIX = '0x';
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.isHexString = isHexString;exports.add0x = add0x;exports.hasHexPrefix = hasHexPrefix;exports.stripHexPrefix = stripHexPrefix;exports.remove0x = remove0x;exports.isTxOrBlockHash = isTxOrBlockHash;const HEX_PREFIX = '0x';
 
 function isHexPrefix(str) {
   return str === HEX_PREFIX;
@@ -69,4 +69,13 @@ function remove0x(value) {
     if (hasHexPrefix(s)) return prefix + stripHexPrefix(s);
   }
   return value;
+}
+
+/**
+   * @description Checks if a string is a tx or block hash
+   * @param {string} str
+   * @returns {Boolean}'
+   */
+function isTxOrBlockHash(str) {
+  return parseInt(str) > 0 && /^(0x)?[0-9a-f]{64}$/.test(str);
 }

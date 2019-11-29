@@ -70,3 +70,12 @@ export function remove0x (value) {
   }
   return value
 }
+
+/**
+ * @description Checks if a string is a tx or block hash
+ * @param {string} str
+ * @returns {Boolean}'
+ */
+export function isTxOrBlockHash (str) {
+  return parseInt(str) > 0 && /^(0x)?[0-9a-f]{64}$/.test(str)
+}
