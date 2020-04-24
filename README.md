@@ -1,5 +1,17 @@
-# rsk-utils
-> A collection of JS utility functions for RSK.
+# rskjs-util
+
+<!-- NPM Version -->
+<a href="https://www.npmjs.org/package/@rsksmart/rskjs-util">
+	<img src="http://img.shields.io/npm/v/@rsksmart/rskjs-util.svg"
+alt="NPM version" />
+</a>
+
+<!-- Gitter chat -->
+<a href="https://gitter.im/rsksmart/rskj">
+	<img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter chat" />
+</a>
+
+A collection of JS utility functions for RSK.
 
 ## Addresses
 <a name="isAddress"></a>
