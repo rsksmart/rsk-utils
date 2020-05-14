@@ -58,6 +58,17 @@ Search network info of checksummed address
 - [networks] <code>Array</code> - chainId list
 see: https://chainid.network/chains.json
 
+<a name="isZeroAddress"></a>
+
+### isZeroAddress(address, chainId) ⇒ <code>Boolean</code>
+Checks if is zero address.
+
+**Kind**: global function  
+**Params**
+
+- address <code>String</code>
+- chainId <code>Integer</code> | <code>String</code>
+
 
 ## Arrays
 <a name="arrayIntersection"></a>
@@ -111,6 +122,29 @@ Check if an array contains all the searched items
 
 - haystack <code>Array</code>
 - needle <code>Array</code>
+
+
+## Bytes
+<a name="toBuffer"></a>
+
+### toBuffer(value, [encoding]) ⇒ <code>Buffer</code>
+Converts strings or numbers to buffer
+
+**Kind**: global function  
+**Params**
+
+- value <code>string</code> | <code>number</code> | <code>buffer</code>
+- [encoding] <code>String</code> <code> = &#x27;hex&#x27;</code>
+
+<a name="bufferToHex"></a>
+
+### bufferToHex(buffer) ⇒ <code>String</code>
+Converts buffer to hex string
+
+**Kind**: global function  
+**Params**
+
+- buffer <code>Buffer</code>
 
 
 ## Hashes

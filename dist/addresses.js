@@ -1,12 +1,19 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.isAddress = isAddress;exports.toChecksumAddress = toChecksumAddress;exports.isValidChecksumAddress = isValidChecksumAddress;exports.isValidAddress = isValidAddress;exports.searchChecksummedNetworks = searchChecksummedNetworks;var _hashes = require("./hashes");
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.zeroAddress = zeroAddress;exports.isAddress = isAddress;exports.toChecksumAddress = toChecksumAddress;exports.isValidChecksumAddress = isValidChecksumAddress;exports.isValidAddress = isValidAddress;exports.searchChecksummedNetworks = searchChecksummedNetworks;exports.isZeroAddress = isZeroAddress;exports.ZERO_ADDRESS = void 0;var _hashes = require("./hashes");
 var _strings = require("./strings");
+var _bytes = require("./bytes");
 var _networks = _interopRequireDefault(require("./networks.json"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+function zeroAddress() {
+  return (0, _strings.add0x)((0, _bytes.bufferToHex)(Buffer.allocUnsafe(20).fill(0)));
+}
+
+const ZERO_ADDRESS = zeroAddress();
+
 /**
-                                                                                                                                                                  * @description Check if a string is an address
-                                                                                                                                                                  * @param {String} address
-                                                                                                                                                                  * @returns {Boolean}
-                                                                                                                                                                  */
+                                     * @description Check if a string is an address
+                                     * @param {String} address
+                                     * @returns {Boolean}
+                                     */exports.ZERO_ADDRESS = ZERO_ADDRESS;
 function isAddress(address) {
   return /^(0x)?[0-9a-fA-F]{40}$/.test(address);
 }
@@ -59,4 +66,14 @@ function isValidAddress(address, chainId) {
 function searchChecksummedNetworks(address, networks) {
   networks = networks || _networks.default;
   return networks.filter(net => toChecksumAddress(address, net.chainId) === address);
+}
+
+/**
+   * @description Checks if is zero address.
+   * @param {String} address
+   * @param {Integer|String} chainId
+   * @returns {Boolean}
+   */
+function isZeroAddress(address) {
+  return address === ZERO_ADDRESS;
 }
