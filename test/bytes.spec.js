@@ -1,4 +1,4 @@
-import { toBuffer } from '../src/bytes'
+import { toBuffer, bufferToHex } from '../src/bytes'
 import chai from 'chai'
 import chaiBytes from 'chai-bytes'
 chai.use(chaiBytes)
@@ -21,6 +21,17 @@ describe(`# Bytes`, function () {
       value = (!Array.isArray(value)) ? [value] : value
       it(`${value} should return bytes ${expected.toString('hex')}`, () => {
         expect(toBuffer(...value)).to.equalBytes(expected)
+      })
+    }
+  })
+  describe(` bufferToHex()`, function () {
+    const values = ['abc1234cbe', '123456', '0xabcd345683943434343acb54']
+    for (let value of values) {
+      it(`should return an hex string`, () => {
+        let buffer = toBuffer(value)
+        let str = bufferToHex(buffer)
+        let expected = (value.substring(0, 2) === '0x') ? value.substring(2) : value
+        expect(str).to.be.equal('0x' + expected)
       })
     }
   })

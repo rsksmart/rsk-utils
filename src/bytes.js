@@ -1,4 +1,4 @@
-import { remove0x, isHexString } from './strings'
+import { remove0x, isHexString, add0x } from './strings'
 
 /**
  * @description Converts strings or numbers to buffer
@@ -12,4 +12,13 @@ export function toBuffer (value, encoding = 'hex') {
   value = remove0x(value)
   if (!encoding && isHexString(value)) encoding = 'hex'
   return Buffer.from(value, encoding)
+}
+
+/**
+ * @description Converts buffer to hex string
+ * @param {Buffer} buffer
+ * @returns {String}
+ */
+export function bufferToHex (buffer) {
+  return add0x(buffer.toString('hex'))
 }
