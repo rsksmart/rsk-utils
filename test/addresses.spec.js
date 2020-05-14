@@ -3,7 +3,9 @@ import {
   isValidChecksumAddress,
   toChecksumAddress,
   isValidAddress,
-  searchChecksummedNetworks
+  searchChecksummedNetworks,
+  isZeroAddress,
+  zeroAddress
 } from '../src/addresses'
 
 import { assert } from 'chai'
@@ -18,7 +20,7 @@ const invalidAddresses = [
   '0x6c6922571a2c7087d3429da79b1576438a67de9999'
 ]
 const plainAddresses = [
-  '0x0000000000000000000000000000000000000000',
+  zeroAddress(),
   '0x8bf74fede129d697dc9fda5e7530b65fad18afa1',
   '0xcdfe354b71d6ed7aee68928b6a3ce993f191a105',
   '0x6c6922571a2c7087d3429da79b1576438a67de93',
@@ -125,6 +127,8 @@ describe(`# Addresses`, function () {
   test({ isAddress }, invalidAddresses, false)
   test({ isValidAddress }, invalidAddresses, false)
   test({ isValidAddress }, plainAddresses, true)
+  test({ isZeroAddress }, allAddresses.filter(a => a !== zeroAddress()), false)
+  test({ isZeroAddress }, [zeroAddress(), '0x0000000000000000000000000000000000000000'], true)
 
   for (let id in netAddresses) {
     let addrs = netAddresses[id].map(a => [a, id])

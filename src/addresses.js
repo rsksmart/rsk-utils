@@ -1,6 +1,13 @@
 import { keccak256 } from './hashes'
-import { stripHexPrefix } from './strings'
+import { stripHexPrefix, add0x } from './strings'
+import { bufferToHex } from './bytes'
 import nets from './networks.json'
+
+export function zeroAddress () {
+  return add0x(bufferToHex(Buffer.allocUnsafe(20).fill(0)))
+}
+
+export const ZERO_ADDRESS = zeroAddress()
 
 /**
  * @description Check if a string is an address
@@ -59,4 +66,14 @@ export function isValidAddress (address, chainId) {
 export function searchChecksummedNetworks (address, networks) {
   networks = networks || nets
   return networks.filter(net => toChecksumAddress(address, net.chainId) === address)
+}
+
+/**
+ * @description Checks if is zero address.
+ * @param {String} address
+ * @param {Integer|String} chainId
+ * @returns {Boolean}
+ */
+export function isZeroAddress (address) {
+  return address === ZERO_ADDRESS
 }
