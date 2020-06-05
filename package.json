@@ -8,7 +8,7 @@
     "test:node": "npx nyc mocha test/**/*.spec.js",
     "test:browser": "npx karma start",
     "test": "npm run test:node && npm run test:browser",
-    "doc": "node ./.doc/makeReadme.js > README.md",
+    "doc": "node ./.doc/makeDoc.js > Documentation.md",
     "build": "npm run lint && npm run doc && npx babel src -d dist --copy-files"
   },
   "repository": {
