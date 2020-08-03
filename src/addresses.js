@@ -3,6 +3,10 @@ import { stripHexPrefix, add0x } from './strings'
 import { bufferToHex } from './bytes'
 import nets from './networks.json'
 
+/**
+ * @description Returns the zero address
+ * @returns {String}
+ */
 export function zeroAddress () {
   return add0x(bufferToHex(Buffer.allocUnsafe(20).fill(0)))
 }
