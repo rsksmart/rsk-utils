@@ -2,23 +2,24 @@ const Jsdoc2md = require('rskjs-jsdoc2md')
 const path = require('path')
 const fs = require('fs')
 
-// const files = path.resolve(__dirname, '../src') + '/*.js'
+const depth = 3
 const basePath = path.resolve(__dirname, '../src')
 const files = fs.readdirSync(basePath).filter(f => f.endsWith('.js')).map(f => {
   return { path: `${basePath}/${f}`, name: titleFromFile(f) }
 })
-const parser = Jsdoc2md({ 'heading-depth': 3 })
+const parser = Jsdoc2md({ 'heading-depth': depth })
 
 mkReadme(files).then(console.log)
 
 
 async function mkReadme (files) {
   try {
-    let content = fs.readFileSync(path.resolve(__dirname, './INTRO.md'), 'utf-8')
+    let content = fs.readFileSync(path.resolve(__dirname, './HEAD.md'), 'utf-8')
     for (let file of files) {
       let { name, path } = file
       let txt = await parser.render(path)
-      if (txt) content += `\n## ${name}\n${txt}`
+      const h = '#'.repeat(depth - 1)
+      if (txt) content += `\n${h} ${name}\n${txt}`
     }
     return content
   } catch (err) {
