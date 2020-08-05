@@ -3,6 +3,10 @@ var _strings = require("./strings");
 var _bytes = require("./bytes");
 var _networks = _interopRequireDefault(require("./networks.json"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+/**
+                                                                                                                                                                  * @description Returns the zero address
+                                                                                                                                                                  * @returns {String}
+                                                                                                                                                                  */
 function zeroAddress() {
   return (0, _strings.add0x)((0, _bytes.bufferToHex)(Buffer.allocUnsafe(20).fill(0)));
 }

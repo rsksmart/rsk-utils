@@ -1,6 +1,6 @@
 {
   "name": "@rsksmart/rsk-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A collection of JS utility functions for RSK",
   "main": "dist/index.js",
   "scripts": {
