@@ -1,4 +1,4 @@
-const Jsdoc2md = require('rskjs-jsdoc2md')
+const Jsdoc2md = require('@rsksmart/rskjs-jsdoc2md')
 const path = require('path')
 const fs = require('fs')
 

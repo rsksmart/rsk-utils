@@ -6,13 +6,13 @@ It can be used in the browser with [browserify](http://browserify.org).
 ## Install
 
 ```
-npm install rsk-utils
+npm install @rsksmart/rsk-utils
 ```
 
 ## Usage
 ```javascript
 
-const rskUtils = require('rsk-utils')
+const rskUtils = require('@rsksmart/rsk-utils')
 
 ```
 
@@ -37,5 +37,3 @@ npm run test:browser
 ## Documentation
 
 see [Documentation.md](Documentation.md)
-
-
