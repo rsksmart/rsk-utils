@@ -1,83 +1,92 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.zeroAddress = zeroAddress;exports.isAddress = isAddress;exports.toChecksumAddress = toChecksumAddress;exports.isValidChecksumAddress = isValidChecksumAddress;exports.isValidAddress = isValidAddress;exports.searchChecksummedNetworks = searchChecksummedNetworks;exports.isZeroAddress = isZeroAddress;exports.ZERO_ADDRESS = void 0;var _hashes = require("./hashes");
-var _strings = require("./strings");
-var _bytes = require("./bytes");
-var _networks = _interopRequireDefault(require("./networks.json"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ZERO_ADDRESS = void 0;
+exports.zeroAddress = zeroAddress;
+exports.isAddress = isAddress;
+exports.toChecksumAddress = toChecksumAddress;
+exports.isValidChecksumAddress = isValidChecksumAddress;
+exports.isValidAddress = isValidAddress;
+exports.searchChecksummedNetworks = searchChecksummedNetworks;
+exports.isZeroAddress = isZeroAddress;
+var hashes_1 = require("./hashes");
+var strings_1 = require("./strings");
+var bytes_1 = require("./bytes");
+var networks_json_1 = __importDefault(require("./networks.json"));
 /**
-                                                                                                                                                                  * @description Returns the zero address
-                                                                                                                                                                  * @returns {String}
-                                                                                                                                                                  */
+ * @description Returns the zero address
+ * @returns {string}
+ */
 function zeroAddress() {
-  return (0, _strings.add0x)((0, _bytes.bufferToHex)(Buffer.allocUnsafe(20).fill(0)));
+    return (0, strings_1.add0x)((0, bytes_1.bufferToHex)(Buffer.allocUnsafe(20).fill(0)));
 }
-
-const ZERO_ADDRESS = zeroAddress();
-
+exports.ZERO_ADDRESS = zeroAddress();
 /**
-                                     * @description Check if a string is an address
-                                     * @param {String} address
-                                     * @returns {Boolean}
-                                     */exports.ZERO_ADDRESS = ZERO_ADDRESS;
+ * @description Check if a string is an address
+ * @param {string} address
+ * @returns {boolean}
+ */
 function isAddress(address) {
-  return /^(0x)?[0-9a-fA-F]{40}$/.test(address);
+    return /^(0x)?[0-9a-fA-F]{40}$/.test(address);
 }
 /**
-   * @description Implements EIP-1191 Address Checksum
-   * @param {String} address
-   * @param {Integer|String} chainId
-   * @returns {String} checksummed address
-   */
+ * @description Implements EIP-1191 Address Checksum
+ * @param {string} address
+ * @param {number|string} chainId
+ * @returns {string} checksummed address
+ */
 function toChecksumAddress(address, chainId) {
-  address = (0, _strings.stripHexPrefix)(address).toLowerCase();
-  chainId = parseInt(chainId);
-  const prefix = !isNaN(chainId) ? `${chainId.toString()}0x` : '';
-  const hash = (0, _hashes.keccak256)(`${prefix}${address}`).toString('hex');
-  return '0x' + address.split('').
-  map((b, i) => parseInt(hash[i], 16) >= 8 ? b.toUpperCase() : b).
-  join('');
+    address = (0, strings_1.stripHexPrefix)(address).toLowerCase();
+    if (typeof chainId === 'string')
+        chainId = parseInt(chainId);
+    var prefix = (!isNaN(chainId)) ? "".concat(chainId.toString(), "0x") : '';
+    var hash = (0, hashes_1.keccak256)("".concat(prefix).concat(address)).toString();
+    return '0x' + address.split('')
+        .map(function (b, i) { return (parseInt(hash[i], 16) >= 8) ? b.toUpperCase() : b; })
+        .join('');
 }
 /**
-   * @description Validates address checksum
-   * @param {String} address
-   * @param {Integer|String} chainId
-   * @returns {Boolean}
-   */
+ * @description Validates address checksum
+ * @param {string} address
+ * @param {number|string} chainId
+ * @returns {boolean}
+ */
 function isValidChecksumAddress(address, chainId) {
-  return isAddress(address) && toChecksumAddress(address, chainId) === address;
+    return isAddress(address) && toChecksumAddress(address, chainId) === address;
 }
-
 /**
-   * @description Checks if an address is valid.
-   * @param {String} address
-   * @param {Integer|String} chainId
-   * @returns {Boolean}
-   */
+ * @description Checks if an address is valid.
+ * @param {string} address
+ * @param {number|string} chainId
+ * @returns {boolean}
+ */
 function isValidAddress(address, chainId) {
-  if (typeof address !== 'string') return false;
-  if (address.match(/[A-F]/)) {
-    return isValidChecksumAddress(address, chainId);
-  }
-  return isAddress(address);
+    if (typeof address !== 'string')
+        return false;
+    if (address.match(/[A-F]/)) {
+        return isValidChecksumAddress(address, chainId);
+    }
+    return isAddress(address);
 }
-
 /**
-   * @description Search network info of checksummed address
-   * @param {String} address
-   * @param {Array} [networks], chainId list
-   * see: https://chainid.network/chains.json
-   * @returns {Array}
-   */
+ * @description Search checksummed networks
+ * @param {string} address
+ * @param {Network[]} [networks], chainId list
+ * see: https://chainid.network/chains.json
+ * @returns {number[]}
+ */
 function searchChecksummedNetworks(address, networks) {
-  networks = networks || _networks.default;
-  return networks.filter(net => toChecksumAddress(address, net.chainId) === address);
+    networks = networks || networks_json_1.default;
+    return Object.values(networks)
+        .filter(function (net) { return toChecksumAddress(address, net.chainId) === address; });
 }
-
 /**
-   * @description Checks if is zero address.
-   * @param {String} address
-   * @param {Integer|String} chainId
-   * @returns {Boolean}
-   */
+ * @description Checks if is zero address.
+ * @param {string} address
+ * @returns {boolean}
+ */
 function isZeroAddress(address) {
-  return address === ZERO_ADDRESS;
+    return address === exports.ZERO_ADDRESS;
 }

@@ -69,7 +69,7 @@ describe(`# Strings`, function () {
   test({ isTxOrBlockHash }, isTxOrBlockHashExpect)
 })
 
-function test (payload, values) {
+function test (payload: any, values: any[]) {
   for (let method in payload) {
     describe(`${method}()`, function () {
       for (let v of values) {
@@ -81,13 +81,13 @@ function test (payload, values) {
   }
 }
 
-function assertEqual (cb, value, expected) {
+function assertEqual (c: any, value: any, expected: any) {
   it(`${value} should return ${expected}`, () => {
-    expect(cb(value)).to.be.deep.equal(expected)
+    expect(c(value)).to.be.deep.equal(expected)
   })
 }
 
-function assertThrow (cb, value, expected) {
+function assertThrow (cb: any, value: any, expected: any) {
   it(`${value} should throw ${expected()}`, () => {
     expect(() => cb(value)).to.throw(expected)
   })

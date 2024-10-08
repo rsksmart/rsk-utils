@@ -6,11 +6,11 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'mocha'],
+    frameworks: ['mocha', 'karma-typescript'],
 
     // list of files / patterns to load in the browser
     files: [
-      'test/*.spec.js'
+      'test/*.spec.ts'
     ],
 
     // list of files / patterns to exclude
@@ -20,20 +20,12 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*.spec.js': ['browserify']
-    },
-    browserify: {
-      'transform': [
-        [
-          'babelify'
-        ]
-      ],
-      debug: true
+      '**/*.ts': ['karma-typescript']
     },
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'karma-typescript'],
 
     // web server port
     port: 9876,
@@ -50,18 +42,21 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox', 'Chrome'],
+    browsers: ['ChromeHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
     plugins: [
-      'karma-browserify',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-mocha'
+      'karma-mocha',
+      'karma-typescript'
     ],
 
+    karmaTypescriptConfig: {
+      tsconfig: './tsconfig.json',
+    },
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity

@@ -73,8 +73,12 @@ const EIP1191rskTestnet = [
   '0xFb6916095CA1dF60bb79CE92ce3Ea74C37c5D359'
 ]
 
-const eip1191ChecksummAddresses = {
-  1: [
+interface NetworkAddresses {
+  [key: string]: string[];
+}
+
+const eip1191ChecksummAddresses: NetworkAddresses = {
+  "1": [
     '0x88021160c5C792225E4E5452585947470010289d',
     '0x27b1FdB04752bBc536007a920D24ACB045561c26',
     '0x52908400098527886e0f7030069857D2e4169EE7',
@@ -85,7 +89,7 @@ const eip1191ChecksummAddresses = {
     '0xDe709F2102306220921060314715629080E2fb77',
     '0xfb6916095Ca1dF60bB79cE92ce3ea74C37c5D359'
   ],
-  30: [
+  "30": [
     '0x6549F4939460DE12611948B3F82B88C3C8975323',
     '0x27b1FdB04752BBc536007A920D24ACB045561c26',
     '0x3599689E6292B81B2D85451025146515070129Bb',
@@ -97,7 +101,7 @@ const eip1191ChecksummAddresses = {
     '0xDe709F2102306220921060314715629080e2FB77',
     '0xFb6916095cA1Df60bb79ce92cE3EA74c37c5d359'
   ],
-  31: [
+  "31": [
     '0x42712D45473476B98452F434E72461577D686318',
     '0x27B1FdB04752BbC536007a920D24acB045561C26',
     '0x3599689e6292b81b2D85451025146515070129Bb',
@@ -112,10 +116,11 @@ const eip1191ChecksummAddresses = {
   ]
 }
 const checkSummed = [...EIP1191rskMainnet, ...EIP1191rskTestnet, ...EIP1191ethMainnet]
-const netAddresses = {
-  30: EIP1191rskMainnet,
-  31: EIP1191rskTestnet,
-  1: EIP1191ethMainnet.map(a => toChecksumAddress(a, 1))
+
+const netAddresses: NetworkAddresses = {
+  "30": EIP1191rskMainnet,
+  "31": EIP1191rskTestnet,
+  "1": EIP1191ethMainnet.map(a => toChecksumAddress(a, 1))
 }
 
 const allAddresses = [
@@ -131,7 +136,7 @@ describe(`# Addresses`, function () {
   test({ isZeroAddress }, [zeroAddress(), '0x0000000000000000000000000000000000000000'], true)
 
   for (let id in netAddresses) {
-    let addrs = netAddresses[id].map(a => [a, id])
+    let addrs = netAddresses[id].map((a: any) => [a, id])
     test({ isValidChecksumAddress }, addrs, true)
     test({ isValidAddress }, addrs, true)
     // validateAddress with changed ids
@@ -158,7 +163,7 @@ describe(`searchChecksummedNetworks()`, function () {
   }
 })
 
-function test (payload, value, expected) {
+function test (payload: any, value: any[], expected: boolean | string[]) {
   value = (!Array.isArray(value)) ? [value] : value
   for (let method in payload) {
     let tm = payload[method]
