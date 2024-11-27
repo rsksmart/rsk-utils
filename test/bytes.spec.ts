@@ -6,7 +6,7 @@ const { expect } = chai
 
 describe(`# Bytes`, function () {
   describe(`toBuffer()`, function () {
-    const toBufferExpected = [
+    const toBufferExpected: any[][] = [
       ['0x0a', '0a'],
       ['0abc12', '0abc12'],
       [['0abc12', false], '0abc12'],
@@ -19,8 +19,13 @@ describe(`# Bytes`, function () {
     for (let c of toBufferExpected) {
       let [value, expected] = c
       value = (!Array.isArray(value)) ? [value] : value
-      it(`${value} should return bytes ${expected.toString('hex')}`, () => {
-        expect(toBuffer(...value)).to.equalBytes(expected)
+      it(`${value} should return bytes ${(expected as string).toString()}`, () => {
+        if (Array.isArray(value)) {
+          let [valueToBuffer, encoding] = value;
+          expect(toBuffer(valueToBuffer, encoding)).to.equalBytes(expected as string)
+        } else {
+          expect(toBuffer(value)).to.equalBytes(expected as string)
+        }
       })
     }
   })
@@ -30,7 +35,7 @@ describe(`# Bytes`, function () {
       it(`should return an hex string`, () => {
         let buffer = toBuffer(value)
         let str = bufferToHex(buffer)
-        let expected = (value.substring(0, 2) === '0x') ? value.substring(2) : value
+        let expected = (value.startsWith('0x')) ? value.substring(2) : value
         expect(str).to.be.equal('0x' + expected)
       })
     }

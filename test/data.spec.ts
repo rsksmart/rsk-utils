@@ -3,7 +3,7 @@ import { expect } from 'chai'
 
 const empty = [null, 0, '0x', '0x0', '0x00', undefined, false, '', '   ']
 const notEmpty = [1, 'a', '0xa', '0x1', '12', true, 'blah', '  1']
-const wrapStr = str => (typeof str === 'string') ? `"${str}"` : str
+const wrapStr = (str: any) => (typeof str === 'string') ? `"${str}"` : str
 
 describe(`# Validate`, function () {
   describe(`sumDigits()`, function () {

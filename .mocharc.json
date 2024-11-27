@@ -1,4 +1,3 @@
 {
-  "recursive": true,
-  "require": "@babel/register"
+  "recursive": true
 }
