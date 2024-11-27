@@ -27,13 +27,6 @@ To test in nodejs only:
 npm run test:node
 ```
 
-To run the tests in browsers only:
-
-```
-npm run test:browser
-
-```
-
 ## Documentation
 
 see [Documentation.md](Documentation.md)
