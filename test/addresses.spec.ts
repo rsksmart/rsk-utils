@@ -19,6 +19,7 @@ const invalidAddresses = [
   0x6c6922571a2c7087d3429da79b1576438a67de93,
   '0x6c6922571a2c7087d3429da79b1576438a67de9999'
 ]
+
 const plainAddresses = [
   zeroAddress(),
   '0x8bf74fede129d697dc9fda5e7530b65fad18afa1',
@@ -42,6 +43,7 @@ const EIP1191ethMainnet = [
   '0xde709f2102306220921060314715629080e2fb77',
   '0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359'
 ]
+
 const EIP1191rskMainnet = [
   '0x27b1FdB04752BBc536007A920D24ACB045561c26',
   '0x3599689E6292B81B2D85451025146515070129Bb',
@@ -57,6 +59,7 @@ const EIP1191rskMainnet = [
   '0xDe709F2102306220921060314715629080e2FB77',
   '0xFb6916095cA1Df60bb79ce92cE3EA74c37c5d359'
 ]
+
 const EIP1191rskTestnet = [
   '0x27B1FdB04752BbC536007a920D24acB045561C26',
   '0x3599689e6292b81b2D85451025146515070129Bb',
@@ -115,6 +118,7 @@ const eip1191ChecksummAddresses: NetworkAddresses = {
     '0xdbF03B407C01E7cd3cbEa99509D93f8dDDc8C6fB'
   ]
 }
+
 const checkSummed = [...EIP1191rskMainnet, ...EIP1191rskTestnet, ...EIP1191ethMainnet]
 
 const netAddresses: NetworkAddresses = {
@@ -153,11 +157,11 @@ describe(`# Addresses`, function () {
 
 describe(`searchChecksummedNetworks()`, function () {
   for (let id in netAddresses) {
-    for (let address of netAddresses[id]) {
-      it(`should return a network info`, () => {
-        let result = searchChecksummedNetworks(address)
-        assert.equal(Array.isArray(result), true)
-        assert.isTrue(result.map(r => r.chainId).includes(parseInt(id)))
+    for (const address of netAddresses[id]) {
+      it(`should return a network info for address ${address}`, () => {
+        const result = searchChecksummedNetworks(address);
+        assert.equal(Array.isArray(result), true);
+        assert.isTrue(result.some(r => r.chainId === parseInt(id)));
       })
     }
   }
