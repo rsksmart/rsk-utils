@@ -120,9 +120,9 @@ export function isValidAddress (address: string, chainId: number | string): bool
 /**
  * @description Searches for networks where the provided address matches the checksummed format for the network's chain ID.
  * This implements EIP-1191 to account for checksum validation based on the chain ID.
- * 
  * @param {string} address - The address to search for in checksummed format.
  * @param {Network[]} [networks] - An optional list of networks to search. If not provided, defaults to the imported networks from networks.json.
+ * see: https://chainid.network/chains.json
  * @returns {Network[]} - An array of networks where the address matches the checksummed format for the network's chain ID.
  */
 export function searchChecksummedNetworks(address: string, networks?: Network[]): Network[] {
