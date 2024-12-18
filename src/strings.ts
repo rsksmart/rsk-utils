@@ -1,17 +1,31 @@
 const HEX_PREFIX = '0x';
 
+/**
+ * @description Checks if a given string is the hex prefix (`"0x"`).
+ * 
+ * @param {string} str - The string to check.
+ * @returns {boolean} - Returns true if the string is exactly `"0x"`, false otherwise.
+ */
 function isHexPrefix(str: string): boolean {
   return str === HEX_PREFIX;
 }
 
+/**
+ * @description Validates that a value is of type string. Throws an error if the value is not a string.
+ * 
+ * @param {any} value - The value to validate.
+ * @throws {TypeError} - Throws an error if the value is not a string.
+ */
 function checkString(value: any): void {
   if (typeof value !== 'string') throw new TypeError('str is not a string');
 }
 
 /**
- * @description Checks if a string is hex string
- * @param {string} str
- * @returns {boolean}
+ * @description Checks if a given string is a valid hexadecimal string. 
+ * Hexadecimal strings may optionally start with the `"0x"` prefix.
+ * 
+ * @param {string} str - The string to validate as a hexadecimal string.
+ * @returns {boolean} - Returns true if the string is valid hexadecimal, false otherwise.
  */
 export function isHexString(str: string): boolean {
   str = stripHexPrefix(str);
@@ -19,9 +33,12 @@ export function isHexString(str: string): boolean {
 }
 
 /**
- * @description Add '0x' at start of hex strings, honoring prefix
- * @param {string} str
- * @returns {string}
+ * @description Adds the `"0x"` prefix to a valid hexadecimal string, if not already present. 
+ * Honors negative prefixes (e.g., `"-0x"` for negative hex values).
+ * 
+ * @param {string} str - The string to which the `"0x"` prefix will be added.
+ * @returns {string} - The hexadecimal string with the `"0x"` prefix.
+ * @throws {TypeError} - Throws an error if the input is not a string.
  */
 export function add0x(str: string): string {
   checkString(str);
@@ -31,13 +48,15 @@ export function add0x(str: string): string {
   if (isHexString(s) && !s.startsWith(HEX_PREFIX)) {
     return `${prefix}${HEX_PREFIX}${s}`;
   }
-  return str
+  return str;
 }
 
 /**
- * @description Checks if string is hex prefixed
- * @param {string} str
- * @returns {boolean}
+ * @description Checks if a string starts with the `"0x"` prefix, indicating a hexadecimal string.
+ * 
+ * @param {string} str - The string to check for the `"0x"` prefix.
+ * @returns {boolean} - Returns true if the string starts with `"0x"`, false otherwise.
+ * @throws {TypeError} - Throws an error if the input is not a string.
  */
 export function hasHexPrefix(str: string): boolean {
   checkString(str);
@@ -45,19 +64,23 @@ export function hasHexPrefix(str: string): boolean {
 }
 
 /**
- * @description remove 0x from start of string
- * @param {any} str
- * @returns {string}
+ * @description Removes the `"0x"` prefix from a hexadecimal string, if present.
+ * 
+ * @param {any} str - The string to strip of its `"0x"` prefix.
+ * @returns {string} - The string without the `"0x"` prefix.
+ * @throws {TypeError} - Throws an error if the input is not a string.
  */
 export function stripHexPrefix(str: any): string {
   if (typeof str !== 'string') throw new TypeError('str is not a string');
-  return (hasHexPrefix(str)) ? str.substring(HEX_PREFIX.length) : str;
+  return hasHexPrefix(str) ? str.substring(HEX_PREFIX.length) : str;
 }
 
 /**
- * @description Remove '0x' from hex strings, honoring prefix
- * @param {any} value
- * @returns {any} if value is hex string, {string} without '0x'
+ * @description Removes the `"0x"` prefix from a valid hexadecimal string, if present.
+ * Honors negative prefixes (e.g., `"-0x"` for negative hex values).
+ * 
+ * @param {any} value - The value to process. If it is not a string, the value is returned unchanged.
+ * @returns {any} - If the value is a hex string, returns the string without the `"0x"` prefix. Otherwise, returns the input value unchanged.
  */
 export function remove0x(value: any): any {
   if (typeof value !== 'string') return value;
@@ -72,10 +95,13 @@ export function remove0x(value: any): any {
 }
 
 /**
- * @description Checks if a string is a tx or block hash
- * @param {string} str
- * @returns {Boolean}'
+ * @description Checks if a string is a valid transaction hash or block hash. 
+ * A valid hash is a 64-character hexadecimal string, optionally prefixed with `"0x"`, 
+ * and must represent a number greater than zero.
+ * 
+ * @param {string} str - The string to validate as a transaction or block hash.
+ * @returns {boolean} - Returns true if the string is a valid transaction or block hash, false otherwise.
  */
-export function isTxOrBlockHash (str: string): boolean {
-  return parseInt(str) > 0 && /^(0x)?[0-9a-f]{64}$/.test(str)
+export function isTxOrBlockHash(str: string): boolean {
+  return parseInt(str) > 0 && /^(0x)?[0-9a-f]{64}$/.test(str);
 }
