@@ -1,10 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.keccak256 = keccak256;
-var keccak_1 = __importDefault(require("keccak"));
+import createHash from 'keccak';
 /**
  * @description Generates a Keccak-256 hash of the provided input. Keccak-256 is a cryptographic
  * hashing algorithm widely used in Ethereum, including for generating addresses and signatures.
@@ -13,7 +7,7 @@ var keccak_1 = __importDefault(require("keccak"));
  * @param {BufferEncoding} [format='hex'] - The desired output format of the hash. Defaults to `'hex'`.
  * @returns {string} - The resulting hash as a string in the specified format.
  */
-function keccak256(input, format) {
-    if (format === void 0) { format = 'hex'; }
-    return (0, keccak_1.default)('keccak256').update(input).digest(format);
+export function keccak256(input, format = 'hex') {
+    return createHash('keccak256').update(input).digest(format);
 }
+//# sourceMappingURL=hashes.js.map

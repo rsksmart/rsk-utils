@@ -1,8 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.toBuffer = toBuffer;
-exports.bufferToHex = bufferToHex;
-var strings_1 = require("./strings");
 /**
  * @description Converts a value (string, number, or Buffer) into a Buffer object.
  * Handles hexadecimal strings and numbers by automatically stripping the `"0x"` prefix and applying the appropriate encoding.
@@ -12,17 +7,7 @@ var strings_1 = require("./strings");
  * @returns {Buffer} - The resulting Buffer representation of the input value.
  * @throws {Error} - Throws an error if the input value cannot be converted to a Buffer.
  */
-function toBuffer(value, encoding) {
-    if (encoding === void 0) { encoding = 'hex'; }
-    if (Buffer.isBuffer(value))
-        return value;
-    if (typeof value === 'number')
-        value = value.toString();
-    var strValue = (0, strings_1.remove0x)(value);
-    if (!encoding && (0, strings_1.isHexString)(strValue))
-        encoding = 'hex';
-    return Buffer.from(strValue, encoding);
-}
+export declare function toBuffer(value: string | number | Buffer, encoding?: BufferEncoding): Buffer;
 /**
  * @description Converts a Buffer into a hexadecimal string prefixed with `"0x"`.
  * Useful for representing binary data in a human-readable hexadecimal format.
@@ -30,6 +15,4 @@ function toBuffer(value, encoding) {
  * @param {Buffer} buffer - The Buffer to be converted into a hex string.
  * @returns {string} - The resulting hexadecimal string with a `"0x"` prefix.
  */
-function bufferToHex(buffer) {
-    return (0, strings_1.add0x)(buffer.toString('hex'));
-}
+export declare function bufferToHex(buffer: Buffer): string;

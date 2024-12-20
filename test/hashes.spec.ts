@@ -1,4 +1,4 @@
-import { keccak256 } from '../src/hashes'
+import { keccak256 } from '../src/hashes.js'
 import { assert } from 'chai'
 
 describe('# hashes', function () {

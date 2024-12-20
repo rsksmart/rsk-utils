@@ -14,7 +14,7 @@ exports.includesAll = includesAll;
  * @returns {T[]} - An array containing elements that are present in both `a` and `b`.
  */
 function arrayIntersection(a, b) {
-    return a.filter(function (v) { return b.includes(v); });
+    return a.filter(v => b.includes(v));
 }
 /**
  * @description Computes the difference of two arrays. The difference is a new array containing
@@ -25,7 +25,7 @@ function arrayIntersection(a, b) {
  * @returns {T[]} - An array containing elements that are in `a` but not in `b`.
  */
 function arrayDifference(a, b) {
-    return a.filter(function (x) { return !b.includes(x); });
+    return a.filter(x => !b.includes(x));
 }
 /**
  * @description Computes the symmetric difference of two arrays. The symmetric difference is a new array
@@ -36,7 +36,7 @@ function arrayDifference(a, b) {
  * @returns {T[]} - An array containing elements that are in `a` or `b`, but not both.
  */
 function arraySymmetricDifference(a, b) {
-    return arrayDifference(a, b).concat(b.filter(function (x) { return !a.includes(x); }));
+    return arrayDifference(a, b).concat(b.filter(x => !a.includes(x)));
 }
 /**
  * @description Checks if at least one element of the `needle` array is present in the `haystack` array.
@@ -46,7 +46,7 @@ function arraySymmetricDifference(a, b) {
  * @returns {boolean} - Returns true if any element of `needle` is found in `haystack`, false otherwise.
  */
 function hasValue(haystack, needle) {
-    return needle.some(function (v) { return haystack.includes(v); });
+    return needle.some(v => haystack.includes(v));
 }
 /**
  * @description Checks if all elements of the `needle` array are present in the `haystack` array.
@@ -56,5 +56,6 @@ function hasValue(haystack, needle) {
  * @returns {boolean} - Returns true if all elements of `needle` are found in `haystack`, false otherwise.
  */
 function includesAll(haystack, needle) {
-    return !needle.map(function (t) { return haystack.indexOf(t); }).filter(function (i) { return i < 0; }).length;
+    return !needle.map(t => haystack.indexOf(t)).filter(i => i < 0).length;
 }
+//# sourceMappingURL=arrays.js.map

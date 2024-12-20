@@ -1,4 +1,4 @@
-import { sumDigits, isNullData } from '../src/data'
+import { sumDigits, isNullData } from '../src/data.js'
 import { expect } from 'chai'
 
 const empty = [null, 0, '0x', '0x0', '0x00', undefined, false, '', '   ']

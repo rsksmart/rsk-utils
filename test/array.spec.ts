@@ -1,4 +1,4 @@
-import { arrayIntersection, arraySymmetricDifference, arrayDifference, includesAll, hasValue } from '../src/arrays'
+import { arrayIntersection, arraySymmetricDifference, arrayDifference, includesAll, hasValue } from '../src/arrays.js'
 import { assert } from 'chai'
 
 describe(`# Arrays`, function () {

@@ -1,40 +1,10 @@
-import { keccak256 } from './hashes'
-import { stripHexPrefix, add0x } from './strings'
-import { bufferToHex } from './bytes'
-import nets from './networks.json'
+import { keccak256 } from './hashes.js'
+import { stripHexPrefix, add0x } from './strings.js'
+import { bufferToHex } from './bytes.js'
+import networks, { Network } from './networks.js';
 
-const networks = nets as Network[];
+const nets = networks as Network[];
 
-export interface Network {
-  name: string;
-  chain: string;
-  icon?: string;
-  rpc: string[];
-  faucets: string[];
-  nativeCurrency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  infoURL: string;
-  shortName: string;
-  chainId: number;
-  networkId: number;
-  slip44?: number;
-  ens?: {
-    registry: string;
-  };
-  explorers?: (string | {
-    name: string;
-    url: string;
-    icon?: string;
-    standard?: string;
-  })[];
-  features?: {
-    name: string;
-  }[];
-  title?: string;
-}
 
 /**
  * @description Generates the zero address. The zero address is a special address 
