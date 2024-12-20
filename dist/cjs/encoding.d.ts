@@ -1,19 +1,3 @@
-"use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.atob = atob;
-exports.btoa = btoa;
-exports.jsonEncode = jsonEncode;
-exports.jsonDecode = jsonDecode;
-exports.base64toHex = base64toHex;
 /**
  * @description Decodes a Base64-encoded string into its binary representation.
  * Equivalent to the `atob` function in browsers, but implemented using Node.js Buffer.
@@ -21,9 +5,7 @@ exports.base64toHex = base64toHex;
  * @param {string} str - The Base64-encoded string to decode.
  * @returns {string} - The decoded string in binary format.
  */
-function atob(str) {
-    return Buffer.from(str, 'base64').toString('binary');
-}
+export declare function atob(str: string): string;
 /**
  * @description Encodes a binary string into Base64 format.
  * Equivalent to the `btoa` function in browsers, but implemented using Node.js Buffer.
@@ -31,9 +13,7 @@ function atob(str) {
  * @param {string} base64 - The binary string to encode.
  * @returns {string} - The Base64-encoded string.
  */
-function btoa(base64) {
-    return Buffer.from(base64, 'binary').toString('base64');
-}
+export declare function btoa(base64: string): string;
 /**
  * @description Encodes a JavaScript value into a Base64-encoded JSON string.
  * This is useful for serializing objects or data structures for transmission or storage.
@@ -41,9 +21,7 @@ function btoa(base64) {
  * @param {any} value - The JavaScript value to encode (e.g., an object, array, or primitive).
  * @returns {string} - The Base64-encoded JSON string.
  */
-function jsonEncode(value) {
-    return btoa(JSON.stringify(value));
-}
+export declare function jsonEncode(value: any): string;
 /**
  * @description Decodes a Base64-encoded JSON string into a JavaScript value.
  * This function reverses the process of `jsonEncode`, converting the Base64 string back into its original object or data structure.
@@ -51,9 +29,7 @@ function jsonEncode(value) {
  * @param {string} value - The Base64-encoded JSON string to decode.
  * @returns {any} - The decoded JavaScript value (e.g., an object, array, or primitive).
  */
-function jsonDecode(value) {
-    return JSON.parse(atob(value));
-}
+export declare function jsonDecode(value: string): any;
 /**
  * @description Converts a Base64-encoded string into a hexadecimal string.
  * Each byte of the Base64-decoded data is converted into a 2-character hex value.
@@ -61,10 +37,4 @@ function jsonDecode(value) {
  * @param {string} base64 - The Base64-encoded string to convert.
  * @returns {string} - A hexadecimal string prefixed with `"0x"`.
  */
-function base64toHex(base64) {
-    var raw = atob(base64);
-    return '0x' + __spreadArray([], new Array(raw.length), true).map(function (c, i) {
-        var h = raw.charCodeAt(i).toString(16);
-        return (h.length === 2) ? h : "0".concat(h);
-    }).join('').toLowerCase();
-}
+export declare function base64toHex(base64: string): string;

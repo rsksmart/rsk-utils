@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sumDigits = void 0;
 exports.isNullData = isNullData;
-var strings_1 = require("./strings");
+const strings_js_1 = require("./strings.js");
 /**
  * @description Calculates the sum of all numeric digits in a given value.
  * The value is first converted to a string, then split into individual characters,
@@ -11,7 +11,7 @@ var strings_1 = require("./strings");
  * @param {any} value - The input value whose digits will be summed. The value is converted to a string if it is not already one.
  * @returns {number} - The sum of all numeric digits in the input value.
  */
-var sumDigits = function (value) { return "".concat(value).split('').map(Number).reduce(function (a, b) { return a + b; }, 0); };
+const sumDigits = (value) => `${value}`.split('').map(Number).reduce((a, b) => a + b, 0);
 exports.sumDigits = sumDigits;
 /**
  * @description Checks if a given value is considered "null data" based on specific criteria.
@@ -24,8 +24,9 @@ exports.sumDigits = sumDigits;
  * @returns {boolean} - Returns true if the value is considered "null data," false otherwise.
  */
 function isNullData(value) {
-    var test = (value && (0, strings_1.remove0x)(value));
+    const test = (value && (0, strings_js_1.remove0x)(value));
     if (test === '' || (0, exports.sumDigits)(test) === 0)
         return true;
     return !test;
 }
+//# sourceMappingURL=data.js.map

@@ -1,12 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isHexString = isHexString;
-exports.add0x = add0x;
-exports.hasHexPrefix = hasHexPrefix;
-exports.stripHexPrefix = stripHexPrefix;
-exports.remove0x = remove0x;
-exports.isTxOrBlockHash = isTxOrBlockHash;
-var HEX_PREFIX = '0x';
+const HEX_PREFIX = '0x';
 /**
  * @description Checks if a given string is the hex prefix (`"0x"`).
  *
@@ -33,7 +25,7 @@ function checkString(value) {
  * @param {string} str - The string to validate as a hexadecimal string.
  * @returns {boolean} - Returns true if the string is valid hexadecimal, false otherwise.
  */
-function isHexString(str) {
+export function isHexString(str) {
     str = stripHexPrefix(str);
     return /^[0-9a-f]+$/i.test(str);
 }
@@ -45,14 +37,14 @@ function isHexString(str) {
  * @returns {string} - The hexadecimal string with the `"0x"` prefix.
  * @throws {TypeError} - Throws an error if the input is not a string.
  */
-function add0x(str) {
+export function add0x(str) {
     checkString(str);
-    var s = str;
-    var prefix = (s.startsWith('-')) ? '-' : '';
+    let s = str;
+    let prefix = (s.startsWith('-')) ? '-' : '';
     if (prefix)
         s = s.substring(prefix.length);
     if (isHexString(s) && !s.startsWith(HEX_PREFIX)) {
-        return "".concat(prefix).concat(HEX_PREFIX).concat(s);
+        return `${prefix}${HEX_PREFIX}${s}`;
     }
     return str;
 }
@@ -63,7 +55,7 @@ function add0x(str) {
  * @returns {boolean} - Returns true if the string starts with `"0x"`, false otherwise.
  * @throws {TypeError} - Throws an error if the input is not a string.
  */
-function hasHexPrefix(str) {
+export function hasHexPrefix(str) {
     checkString(str);
     return str.startsWith(HEX_PREFIX);
 }
@@ -74,7 +66,7 @@ function hasHexPrefix(str) {
  * @returns {string} - The string without the `"0x"` prefix.
  * @throws {TypeError} - Throws an error if the input is not a string.
  */
-function stripHexPrefix(str) {
+export function stripHexPrefix(str) {
     if (typeof str !== 'string')
         throw new TypeError('str is not a string');
     return hasHexPrefix(str) ? str.substring(HEX_PREFIX.length) : str;
@@ -86,13 +78,13 @@ function stripHexPrefix(str) {
  * @param {any} value - The value to process. If it is not a string, the value is returned unchanged.
  * @returns {any} - If the value is a hex string, returns the string without the `"0x"` prefix. Otherwise, returns the input value unchanged.
  */
-function remove0x(value) {
+export function remove0x(value) {
     if (typeof value !== 'string')
         return value;
     if (isHexPrefix(value))
         return '';
-    var s = "".concat(value);
-    var prefix = (s.startsWith('-')) ? '-' : '';
+    let s = `${value}`;
+    let prefix = (s.startsWith('-')) ? '-' : '';
     if (prefix)
         s = s.substring(prefix.length);
     if (isHexString(s)) {
@@ -109,6 +101,7 @@ function remove0x(value) {
  * @param {string} str - The string to validate as a transaction or block hash.
  * @returns {boolean} - Returns true if the string is a valid transaction or block hash, false otherwise.
  */
-function isTxOrBlockHash(str) {
+export function isTxOrBlockHash(str) {
     return parseInt(str) > 0 && /^(0x)?[0-9a-f]{64}$/.test(str);
 }
+//# sourceMappingURL=strings.js.map

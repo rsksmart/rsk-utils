@@ -1,4 +1,4 @@
-import { add0x, remove0x, isHexString, stripHexPrefix, isTxOrBlockHash } from '../src/strings'
+import { add0x, remove0x, isHexString, stripHexPrefix, isTxOrBlockHash } from '../src/strings.js'
 import { expect } from 'chai'
 
 const add0xExpect = [

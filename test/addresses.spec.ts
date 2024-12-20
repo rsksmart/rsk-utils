@@ -6,7 +6,7 @@ import {
   searchChecksummedNetworks,
   isZeroAddress,
   zeroAddress
-} from '../src/addresses'
+} from '../src/addresses.js'
 
 import { assert } from 'chai'
 

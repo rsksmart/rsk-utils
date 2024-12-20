@@ -1,5 +1,5 @@
-import { toBuffer, bufferToHex } from '../src/bytes'
-import chai from 'chai'
+import { toBuffer, bufferToHex } from '../src/bytes.js'
+import * as chai from 'chai'
 import chaiBytes from 'chai-bytes'
 chai.use(chaiBytes)
 const { expect } = chai
