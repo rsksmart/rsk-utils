@@ -14,6 +14,12 @@ const keccak_1 = __importDefault(require("keccak"));
  * @returns {string} - The resulting hash as a string in the specified format.
  */
 function keccak256(input, format = 'hex') {
+    if (typeof input !== 'string' && !Buffer.isBuffer(input)) {
+        throw new TypeError('Input must be a string or Buffer.');
+    }
+    if (!Buffer.isEncoding(format)) {
+        throw new TypeError(`Unsupported format: ${format}`);
+    }
     return (0, keccak_1.default)('keccak256').update(input).digest(format);
 }
 //# sourceMappingURL=hashes.js.map

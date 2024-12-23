@@ -13,7 +13,15 @@ exports.base64toHex = base64toHex;
  * @returns {string} - The decoded string in binary format.
  */
 function atob(str) {
-    return Buffer.from(str, 'base64').toString('binary');
+    if (typeof str !== 'string' || str.trim() === '') {
+        throw new TypeError("Invalid input: Base64 string must be a non-empty string.");
+    }
+    try {
+        return Buffer.from(str, 'base64').toString('binary');
+    }
+    catch {
+        throw new Error("Invalid Base64 string.");
+    }
 }
 /**
  * @description Encodes a binary string into Base64 format.
@@ -23,7 +31,15 @@ function atob(str) {
  * @returns {string} - The Base64-encoded string.
  */
 function btoa(base64) {
-    return Buffer.from(base64, 'binary').toString('base64');
+    if (typeof base64 !== 'string' || base64.trim() === '') {
+        throw new TypeError("Invalid input: Input must be a non-empty string.");
+    }
+    try {
+        return Buffer.from(base64, 'binary').toString('base64');
+    }
+    catch {
+        throw new Error("Failed to encode string to Base64.");
+    }
 }
 /**
  * @description Encodes a JavaScript value into a Base64-encoded JSON string.
@@ -37,7 +53,15 @@ function jsonEncode(value) {
     if (value && typeof value === "object" && typeof value.toJSON === "function") {
         throw new Error("Custom toJSON methods are not allowed for serialization.");
     }
-    return btoa(JSON.stringify(value));
+    if (value === undefined || typeof value === "function") {
+        throw new TypeError("Invalid input: Cannot serialize undefined or functions.");
+    }
+    try {
+        return btoa(JSON.stringify(value));
+    }
+    catch {
+        throw new Error("Failed to encode JSON value.");
+    }
 }
 /**
  * @description Decodes a Base64-encoded JSON string into a JavaScript value.
@@ -48,10 +72,13 @@ function jsonEncode(value) {
  * @throws {Error} - If decoding fails.
  */
 function jsonDecode(value) {
+    if (typeof value !== 'string' || value.trim() === '') {
+        throw new TypeError("Invalid input: Base64-encoded JSON string must be a non-empty string.");
+    }
     try {
         return JSON.parse(atob(value));
     }
-    catch (e) {
+    catch {
         throw new Error("Invalid Base64-encoded JSON string.");
     }
 }
@@ -63,7 +90,16 @@ function jsonDecode(value) {
  * @returns {string} - A hexadecimal string prefixed with `"0x"`.
  */
 function base64toHex(base64) {
-    let raw = atob(base64);
+    if (typeof base64 !== 'string' || base64.trim() === '') {
+        throw new TypeError("Invalid input: Base64 string must be a non-empty string.");
+    }
+    let raw;
+    try {
+        raw = atob(base64);
+    }
+    catch {
+        throw new Error("Invalid Base64 string.");
+    }
     return '0x' + [...new Array(raw.length)].map((c, i) => {
         let h = raw.charCodeAt(i).toString(16);
         return (h.length === 2) ? h : `0${h}`;
