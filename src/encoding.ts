@@ -23,23 +23,32 @@ export function btoa(base64: string): string {
 /**
  * @description Encodes a JavaScript value into a Base64-encoded JSON string.
  * This is useful for serializing objects or data structures for transmission or storage.
- * 
+ *
  * @param {any} value - The JavaScript value to encode (e.g., an object, array, or primitive).
  * @returns {string} - The Base64-encoded JSON string.
+ * @throws {Error} - If the object contains a custom `toJSON` method.
  */
 export function jsonEncode(value: any): string {
+  if (value && typeof value === "object" && typeof value.toJSON === "function") {
+    throw new Error("Custom toJSON methods are not allowed for serialization.");
+  }
   return btoa(JSON.stringify(value));
 }
 
 /**
  * @description Decodes a Base64-encoded JSON string into a JavaScript value.
  * This function reverses the process of `jsonEncode`, converting the Base64 string back into its original object or data structure.
- * 
+ *
  * @param {string} value - The Base64-encoded JSON string to decode.
  * @returns {any} - The decoded JavaScript value (e.g., an object, array, or primitive).
+ * @throws {Error} - If decoding fails.
  */
 export function jsonDecode(value: string): any {
-  return JSON.parse(atob(value));
+  try {
+    return JSON.parse(atob(value));
+  } catch (e) {
+    throw new Error("Invalid Base64-encoded JSON string.");
+  }
 }
 
 /**

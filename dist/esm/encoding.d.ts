@@ -20,6 +20,7 @@ export declare function btoa(base64: string): string;
  *
  * @param {any} value - The JavaScript value to encode (e.g., an object, array, or primitive).
  * @returns {string} - The Base64-encoded JSON string.
+ * @throws {Error} - If the object contains a custom `toJSON` method.
  */
 export declare function jsonEncode(value: any): string;
 /**
@@ -28,6 +29,7 @@ export declare function jsonEncode(value: any): string;
  *
  * @param {string} value - The Base64-encoded JSON string to decode.
  * @returns {any} - The decoded JavaScript value (e.g., an object, array, or primitive).
+ * @throws {Error} - If decoding fails.
  */
 export declare function jsonDecode(value: string): any;
 /**
