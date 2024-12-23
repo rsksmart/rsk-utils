@@ -8,6 +8,12 @@ import createHash from 'keccak';
  * @returns {string} - The resulting hash as a string in the specified format.
  */
 export function keccak256(input, format = 'hex') {
+    if (typeof input !== 'string' && !Buffer.isBuffer(input)) {
+        throw new TypeError('Input must be a string or Buffer.');
+    }
+    if (!Buffer.isEncoding(format)) {
+        throw new TypeError(`Unsupported format: ${format}`);
+    }
     return createHash('keccak256').update(input).digest(format);
 }
 //# sourceMappingURL=hashes.js.map
