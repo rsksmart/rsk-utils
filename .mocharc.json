@@ -1,4 +1,6 @@
 {
-  "recursive": true,
-  "require": "@babel/register"
+  "loader": "ts-node/esm",
+  "extension": ["ts"],
+  "spec": "test/*.spec.ts",
+  "recursive": true
 }

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "outDir": "./dist/cjs",
+    "module": "CommonJS",
+    "target": "ESNext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "./dist/cjs"
+  }
+}

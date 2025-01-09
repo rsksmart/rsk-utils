@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "NodeNext",
+      "outDir": "./dist",
+      "strict": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+    },
+    "include": [
+      "src/**/*.ts",
+      "test/**/*.ts"
+    ]
+  }
