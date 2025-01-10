@@ -51,7 +51,7 @@
     "@types/chai": "^5.0.1",
     "@types/keccak": "^3.0.5",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.10.5",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
     "c8": "^10.1.3",
