@@ -62,8 +62,8 @@ jobs:
               
             - name: Upload package
               run: npm publish --access public
-                env:
-                    NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+              env:
+                NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
             
             - name: Post upload validation
               id: unpack
