@@ -3,7 +3,9 @@ name: Deploy library on NPM
 on:
   release:
     types: [created]
-    
+
+# Declare default permissions as read only.
+permissions: read-all
 
 jobs:
     publish:
