@@ -73,7 +73,7 @@ jobs:
         id: pack
         run: | 
           npm pack --dry-run > output 2>&1
-          PRE_UPLOAD_HASH=$(grep 'shasum' output | awk '{print $2}')
+          PRE_UPLOAD_HASH=$(grep 'shasum' output | awk '{print $NF}')
           echo "PRE_UPLOAD_HASH=$PRE_UPLOAD_HASH" >> $GITHUB_OUTPUT
           echo "PRE_UPLOAD_HASH: $PRE_UPLOAD_HASH"
         
