@@ -9,6 +9,10 @@ permissions: read-all
 
 jobs:
   publish:
+    permissions:
+      id-token: write
+      contents: read
+
     runs-on: ubuntu-latest
 
     steps:
@@ -60,11 +64,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
         with:
-          node-version: 18
+          node-version: 20
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clean install dependencies
+        run: |
+          rm -rf dist
+          npm ci
+
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Build
         run: npm run build
@@ -72,8 +81,8 @@ jobs:
       - name: Pre upload validation
         id: pack
         run: | 
-          npm pack --dry-run > output 2>&1
-          PRE_UPLOAD_HASH=$(grep 'shasum' output | awk '{print $NF}')
+          rm -f *.tgz
+          PRE_UPLOAD_HASH=$(npm pack --dry-run 2>&1 | grep 'shasum:' | awk '{print $NF}')
           echo "PRE_UPLOAD_HASH=$PRE_UPLOAD_HASH" >> $GITHUB_OUTPUT
           echo "PRE_UPLOAD_HASH: $PRE_UPLOAD_HASH"
         
@@ -90,9 +99,7 @@ jobs:
           echo "Version $PACKAGE_VERSION of $PACKAGE_NAME is not published. Proceeding with publishing..."
 
       - name: Upload package
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: npm publish
       
       - name: Post upload validation
         id: unpack
@@ -122,3 +129,4 @@ jobs:
             exit 1
           fi
           echo "Hashes match successfully!"
+
